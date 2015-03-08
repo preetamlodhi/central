@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <mapping-file>Category.xml</mapping-file>
+        <mapping-file>Product.xml</mapping-file>
+        <class>com.bachat.central.dao.Category</class>
+        <class>com.bachat.central.dao.Product</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/bachat"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="rockstar"/>
+            <property name="hibernate.connection.password" value="champ"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>
