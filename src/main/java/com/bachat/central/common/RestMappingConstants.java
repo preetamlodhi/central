@@ -10,4 +10,8 @@ public class RestMappingConstants {
     public static final String GET_ALL_SELLER = "sellers";
     public static final String DELETE_SELLER = "seller/delete/{id}";
 
+    public static final String GET_PRODUCT ="product/{id}";
+    public static final String GET_ALL_PRODUCT ="products";
+    public static final String DELETE_PRODUCT ="product/delete/{id}";
+
 }

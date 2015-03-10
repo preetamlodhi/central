@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.bachat.central.dao.Customer" table="customer" schema="" catalog="bachat">
+        <id name="id">
+            <column name="id" sql-type="bigint unsigned" not-null="true"/>
+        </id>
+        <property name="firstName">
+            <column name="first_name" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="lastName">
+            <column name="last_name" sql-type="varchar" length="20" not-null="true"/>
+        </property>
+        <property name="contactNumber">
+            <column name="contact_number" sql-type="bigint unsigned" not-null="true"/>
+        </property>
+        <property name="emailAddress">
+            <column name="email_address" sql-type="varchar" length="25"/>
+        </property>
+    </class>
+</hibernate-mapping>

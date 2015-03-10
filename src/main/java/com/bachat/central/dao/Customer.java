@@ -1,19 +1,15 @@
 package com.bachat.central.dao;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.Serializable;
 
 /**
  * Created by preetam on 9/3/15.
  */
 @Entity
-public class Seller implements Serializable{
+public class Customer {
     private long id;
     private String firstName;
     private String lastName;
@@ -75,14 +71,14 @@ public class Seller implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Seller seller = (Seller) o;
+        Customer customer = (Customer) o;
 
-        if (contactNumber != seller.contactNumber) return false;
-        if (id != seller.id) return false;
-        if (emailAddress != null ? !emailAddress.equals(seller.emailAddress) : seller.emailAddress != null)
+        if (contactNumber != customer.contactNumber) return false;
+        if (id != customer.id) return false;
+        if (emailAddress != null ? !emailAddress.equals(customer.emailAddress) : customer.emailAddress != null)
             return false;
-        if (firstName != null ? !firstName.equals(seller.firstName) : seller.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(seller.lastName) : seller.lastName != null) return false;
+        if (firstName != null ? !firstName.equals(customer.firstName) : customer.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(customer.lastName) : customer.lastName != null) return false;
 
         return true;
     }

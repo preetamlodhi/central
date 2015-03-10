@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Created by preetam on 9/3/15.
  */
 @Entity
-public class Product {
+public class Shop {
     private long id;
     private String name;
 
@@ -24,7 +24,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 150)
+    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 30)
     public String getName() {
         return name;
     }
@@ -38,10 +38,10 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Product product = (Product) o;
+        Shop shop = (Shop) o;
 
-        if (id != product.id) return false;
-        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        if (id != shop.id) return false;
+        if (name != null ? !name.equals(shop.name) : shop.name != null) return false;
 
         return true;
     }
