@@ -33,6 +33,7 @@
 
       <mapping class="com.bachat.central.dao.State"/>
       <mapping class="com.bachat.central.dao.User"/>
+      <mapping class="com.bachat.central.dao.UserRole"/>
 
       <!--mapping class="com.bachat.central.dao.UserOfferFeedBack"/-->
 

@@ -102,6 +102,20 @@ public class Main{
         session.save(role);
         session.getTransaction().commit();
     }
+
+    //Accepts  user_id's that are  present in user table and role_id's that
+    //  are present in role table
+    public static void addUserRole(long user_id, long role_id){
+        Session session = getSession();
+        session.beginTransaction();
+        UserRolePK userRolePK = new UserRolePK();
+        userRolePK.setUser_id(user_id);
+        userRolePK.setRole_id(role_id);
+        UserRole userRole = new UserRole();
+        userRole.setUserRolePK(userRolePK);
+        session.save(userRole);
+        session.getTransaction().commit();
+    }
     ///////////////////////////////////////////////////////
 
     public static void main(final String[] args) throws Exception {
@@ -127,6 +141,10 @@ public class Main{
 
         //----------MAKING role table------------//
         //addRole(RoleType.ADMIN);
+
+
+        //---------MAKING user_role table-----------//
+        addUserRole(3L,2L);
         System.out.println("Bye Bye !!");
 
     }
