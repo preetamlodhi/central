@@ -19,7 +19,7 @@ public class SellerService {
     public Seller getSeller(long id){
         Session session = HibernateHelper.getSession();
         Seller seller = (Seller)session.load(Seller.class,id);
-        System.out.println(seller.getEmailAddress() + "  " + seller.getFirstName() + "  " + seller.getId());
+        //System.out.println(seller.getEmailAddress() + "  " + seller.getFirstName() + "  " + seller.getId());
         return  seller;
     }
     public List <Seller> getAllSellers(){
@@ -33,7 +33,7 @@ public class SellerService {
         Session session =HibernateHelper.getSession();
         session.beginTransaction();
         Seller seller = (Seller)session.get(Seller.class,id);
-        System.out.print("deleting seller : "+seller.getFirstName()+" "+seller.getLastName()+" "+seller.getEmailAddress());
+        //System.out.print("deleting seller : "+seller.getFirstName()+" "+seller.getLastName()+" "+seller.getEmailAddress());
         session.delete(seller);
         session.getTransaction().commit();
         return;

@@ -10,8 +10,8 @@ public class OfferController {
 	@RequestMapping(value="{name}" , method = RequestMethod.GET)
 	public @ResponseBody Category printWelcome(@PathVariable String name) {
         Category category = new Category();
-        category.setName(name);
-        category.setId(i);
+        //category.setName(name);
+        //category.setId(i);
         return  category;
 	}
 }

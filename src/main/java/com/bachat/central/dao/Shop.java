@@ -1,55 +1,42 @@
 package com.bachat.central.dao;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 /**
- * Created by preetam on 9/3/15.
+ * Created by preetam on 22/3/15.
  */
 @Entity
-public class Shop {
-    private long id;
-    private String name;
-
+@Table(name = "shop")
+public class Shop implements Serializable{
     @Id
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "shop_id", nullable = false, unique = true)
+    private long shop_id;
 
     @Basic
-    @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 30)
-    public String getName() {
-        return name;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)                    //////This should be generated properly
+    @Column(name = "external_shop_id", nullable = false, unique = true)
+    private long external_shop_id;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    //one-to-one relationship with address table
+    //Bidirectional
+    //@OneToOne(mappedBy = "address")
+    //private Address address = null;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    //one-to-one relationship with location table
+    //Bidirectional
+   // @OneToOne(mappedBy = "location")
+   // private Location location = null;
 
-        Shop shop = (Shop) o;
+    //one-to-many relationship with offer table
+    //bidirectional
+    //private Set<Offer>offers = new HashSet<Offer>(0);
 
-        if (id != shop.id) return false;
-        if (name != null ? !name.equals(shop.name) : shop.name != null) return false;
+    //many-to-one relationship with category table
+    //Bidirectional
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
 }

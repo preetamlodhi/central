@@ -1,55 +1,33 @@
 package com.bachat.central.dao;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created by karan on 8/3/15.
+ * Created by preetam on 22/3/15.
  */
+
 @Entity
-public class Category {
-    private long id;
-    private String name;
+@Table(name = "category")
+public class Category implements Serializable{
 
     @Id
-    @Column(name = "id")
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "category_id", nullable = false, unique = true)
+    private long category_id = 0;
 
     @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+    @Column(name = "name", nullable = false, unique = true)
+    private String name = null;
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    //one-to-many relationship with shop
+    //Bidirectional
+    //private Set<Shop>shops = new HashSet<Shop>(0);
 
-        Category category = (Category) o;
-
-        if (id != category.id) return false;
-        if (name != null ? !name.equals(category.name) : category.name != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
+    //one-to-many relationship with offer
+    //Bidirectional
+    //private Set<Offer>offers = new HashSet<Offer>(0);
 }
