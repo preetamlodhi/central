@@ -17,7 +17,22 @@ public class Role implements Serializable{
 
     @Basic
     @Enumerated(EnumType.STRING)
-    @Column(name = "name")
+    @Column(name = "name",nullable = false, length = 20,unique = true)
     private RoleType name = null;
 
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public RoleType getName() {
+        return name;
+    }
+
+    public void setName(RoleType name) {
+        this.name = name;
+    }
 }

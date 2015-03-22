@@ -15,20 +15,29 @@
       <property name="show_sql">true</property>
 
       <mapping class="com.bachat.central.dao.Address"/>
+
       <!--mapping class="com.bachat.central.dao.Category"/-->
+
       <mapping class="com.bachat.central.dao.City"/>
+
       <!--mapping class="com.bachat.central.dao.Location"/>
       <mapping class="com.bachat.central.dao.Offer"/>
       <mapping class="com.bachat.central.dao.OfferHistory"/>
-      <mapping class="com.bachat.central.dao.Product"/>
-      <mapping class="com.bachat.central.dao.Role"/-->
+      <mapping class="com.bachat.central.dao.Product"/-->
+
+      <mapping class="com.bachat.central.dao.Role"/>
       <mapping class="com.bachat.central.dao.Seller"/>
+
       <!--mapping class="com.bachat.central.dao.Shop"/>
       <mapping class="com.bachat.central.dao.ShopRating"/-->
+
       <mapping class="com.bachat.central.dao.State"/>
       <mapping class="com.bachat.central.dao.User"/>
+
       <!--mapping class="com.bachat.central.dao.UserOfferFeedBack"/-->
+
       <mapping class="com.bachat.central.dao.UserProfile"/>
+
       <!--mapping class="com.bachat.central.dao.UserSession"/-->
 
       <!-- DB schema will be updated if needed -->

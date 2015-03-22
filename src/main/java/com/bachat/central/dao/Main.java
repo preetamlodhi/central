@@ -92,6 +92,16 @@ public class Main{
         session.save(seller);
         session.getTransaction().commit();
     }
+
+    //Accepts values that are present in RolyType Enum
+    public static void addRole(RoleType roleType){
+        Session session = getSession();
+        session.beginTransaction();
+        Role role = new Role();
+        role.setName(roleType);
+        session.save(role);
+        session.getTransaction().commit();
+    }
     ///////////////////////////////////////////////////////
 
     public static void main(final String[] args) throws Exception {
@@ -114,6 +124,9 @@ public class Main{
 
         //---------- MAKING seller Table--------//
         //addSeller(3L);
+
+        //----------MAKING role table------------//
+        //addRole(RoleType.ADMIN);
         System.out.println("Bye Bye !!");
 
     }
