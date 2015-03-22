@@ -39,7 +39,6 @@ public class Main{
     ///////////////////////////////////////////////////////
     //Utility functions
     public static void addAddress(String line1, String line2,String area,String pincode,long city_id,long state_id){
-
         Session session = getSession();
         session.beginTransaction();
         Address address = new Address();
@@ -52,6 +51,8 @@ public class Main{
         session.save(address);
         session.getTransaction().commit();
     }
+
+    //Adds a user to the user table
     public static void addUser(String contact_number, String email, String password){
         Session session = getSession();
         session.beginTransaction();
@@ -62,8 +63,10 @@ public class Main{
         session.save(user);
         session.getTransaction().commit();
     }
-    public static void addUserProfile(long user_id,Date date_of_birth,String firstName, Gender gender, String lastName ){
 
+    //Accepts only those user_id that are present in user table
+    //A single user can be assigned only with a single user_profile
+    public static void addUserProfile(long user_id,Date date_of_birth,String firstName, Gender gender, String lastName ){
         Session session = getSession();
         session.beginTransaction();
         UserProfile userProfile = new UserProfile();
@@ -72,16 +75,15 @@ public class Main{
         userProfile.setFirstName(firstName);
         userProfile.setGender(gender);
         userProfile.setLastName(lastName);
-
         user.setUserProfile(userProfile);
         userProfile.setUser(user);
         session.save(user);
         session.getTransaction().commit();
-
-
     }
-    public static void addSeller(long user_id){
 
+    //Accepts only those user_id that are present in user table.
+    //Multiple sellers can't be associated with a single user.
+    public static void addSeller(long user_id){
         Session session = getSession();
         session.beginTransaction();
         Seller seller = new Seller();
@@ -89,7 +91,6 @@ public class Main{
         seller.setUser_id(user_id);
         session.save(seller);
         session.getTransaction().commit();
-
     }
     ///////////////////////////////////////////////////////
 
@@ -112,7 +113,7 @@ public class Main{
         //addUser("4400882200","dummy3@bmw.com","88yyTT..");
 
         //---------- MAKING seller Table--------//
-        //addSeller(2L);
+        //addSeller(3L);
         System.out.println("Bye Bye !!");
 
     }
