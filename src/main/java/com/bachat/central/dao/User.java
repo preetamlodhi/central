@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "user")
 public class User implements Serializable{
     @Id
-    @Column(name="user_id", nullable = false, unique =true)
+    @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long user_id=0;
 
@@ -31,20 +31,27 @@ public class User implements Serializable{
 
     //Relationship
     //One-to-one and bidirectional with user_profile table
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_profile_id")
-    private UserProfile userProfile=null;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private UserProfile userProfile;
 
+    //Relationship
+    //One-to-one and bidirectional with seller table
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL)
+    private Seller seller;
+
+
+    public User(){}
     //One-to-one and bidirectional with seller
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seller_id")
-    private Seller seller=null;
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "seller_id")
+    //private Seller seller=null;
 
     //One-to-many relationship with OfferHistory
     //private Set<OfferHistory>offerHistories = new HashSet<OfferHistory>(0);
 
 
     //Getter and setter methods
+
     public long getUser_id() {
         return user_id;
     }
@@ -85,42 +92,11 @@ public class User implements Serializable{
         this.userProfile = userProfile;
     }
 
-    //equals , hashcode and toString methods
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (user_id != user.user_id) return false;
-        if (contact_number != null ? !contact_number.equals(user.contact_number) : user.contact_number != null)
-            return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (userProfile != null ? !userProfile.equals(user.userProfile) : user.userProfile != null) return false;
-
-        return true;
+    public Seller getSeller() {
+        return seller;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) (user_id ^ (user_id >>> 32));
-        result = 31 * result + (contact_number != null ? contact_number.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (userProfile != null ? userProfile.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id=" + user_id +
-                ", contact_number='" + contact_number + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", userProfile=" + userProfile +
-                '}';
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 }

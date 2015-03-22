@@ -45,11 +45,12 @@ public class City implements Serializable{
     }
 
     //Relationship one-to-many with Address table
-    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "city_id")
-    //private Set<Address> addresses = new HashSet<Address>(0);
+    //Bidirectional
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "city")
+    private Set<Address> addresses = new HashSet<Address>(0);
 
-
+    //Many to one relationship with State
+    //Bidirectional
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "state_id",nullable = false)
     private State state;

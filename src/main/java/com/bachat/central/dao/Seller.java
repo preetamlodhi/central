@@ -1,5 +1,7 @@
 package com.bachat.central.dao;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,13 +18,47 @@ public class Seller implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long seller_id=0;
 
+    //only those values will be permitted that are present
+    //in user_id column of user table
+    @GenericGenerator(name = "generator", strategy = "foreign",
+            parameters = @org.hibernate.annotations.Parameter(name ="property",value = "user"))
+    @Column(name ="user_id",nullable = false,unique = true)
+    @GeneratedValue(generator = "generator")
+    private long user_id;
+
     //Relationship
     //One-to-one and bidirectional with user table
-    @OneToOne (mappedBy = "seller")
-    private User user=null;
+    @OneToOne (fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Seller(){}
+
+    /*@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id")
-    private Set<Shop>shops = new HashSet<Shop>(0);
+    private Set<Shop>shops = new HashSet<Shop>(0);*/
 
+    public long getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(long seller_id) {
+        this.seller_id = seller_id;
+    }
+
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
