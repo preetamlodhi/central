@@ -32,11 +32,11 @@ public class Seller implements Serializable{
     @PrimaryKeyJoinColumn
     private User user;
 
-    public Seller(){}
+    //One-To-Many Relationship with shop
+    @OneToMany(fetch = FetchType.LAZY, cascade =  CascadeType.ALL, mappedBy = "seller")
+    private Set<Shop>shops = new HashSet<Shop>(0);
 
-    /*@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "seller_id")
-    private Set<Shop>shops = new HashSet<Shop>(0);*/
+    public Seller(){}
 
     public long getSeller_id() {
         return seller_id;

@@ -1,6 +1,7 @@
 package com.bachat.central.dao;
 
 import javax.persistence.*;
+import javax.xml.parsers.FactoryConfigurationError;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,17 +20,21 @@ public class Category implements Serializable{
     private long category_id = 0;
 
     @Basic
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true,length = 30)
     private String name = null;
 
 
-    //one-to-many relationship with shop
+    //MANY-TO-MANY relationship with shop
     //Bidirectional
-    //private Set<Shop>shops = new HashSet<Shop>(0);
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+    private Set<Shop>shops = new HashSet<Shop>(0);
 
     //one-to-many relationship with offer
     //Bidirectional
     //private Set<Offer>offers = new HashSet<Offer>(0);
+
+    public Category(){}
 
     public long getCategory_id() {
         return category_id;
@@ -45,5 +50,13 @@ public class Category implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Shop> getShops() {
+        return shops;
+    }
+
+    public void setShops(Set<Shop> shops) {
+        this.shops = shops;
     }
 }

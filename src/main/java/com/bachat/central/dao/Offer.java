@@ -43,7 +43,7 @@ public class Offer implements Serializable{
     private Date end_time = null;                  //proper matching?
 
     @Basic
-    @Column(name = "description", nullable = false, length = 50)     //maximum 50 characters for description
+    @Column(name = "description", nullable = false, length = 100)     //maximum 50 characters for description
     private String description = null;
 
     @Basic

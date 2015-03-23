@@ -117,12 +117,34 @@ public class Main{
         session.getTransaction().commit();
     }
 
+    //Adds a new category to category table
     public static void addCategory(String category_name){
         Session session = getSession();
         session.beginTransaction();
         Category category = new Category();
         category.setName(category_name);
         session.save(category);
+        session.getTransaction().commit();
+    }
+
+    //Adding a shop
+    //Accepts shop name, categories present in category table, seller_id present
+    //in seller table.
+    public static void addShop(String shop_name, long[]categories_array,long seller_id){
+        Session session = getSession();
+        session.beginTransaction();
+        Shop shop = new Shop();
+        shop.setName(shop_name);
+        shop.setSeller((Seller)session.get(Seller.class,seller_id));
+        shop.setExternal_shop_id(seller_id*100);                      //////Here proper method has to be set.
+
+
+        //adding all categoris
+        for(long category_id:categories_array){
+            shop.getCategories().add((Category)session.load(Category.class,category_id));
+        }
+
+        session.save(shop);
         session.getTransaction().commit();
     }
     ///////////////////////////////////////////////////////
@@ -146,7 +168,8 @@ public class Main{
         //addUser("4400882200","dummy3@bmw.com","88yyTT..");
 
         //---------- MAKING seller Table--------//
-        //addSeller(3L);
+        //addSeller(1L);
+        //addSeller(2L);
 
         //----------MAKING role table------------//
         //addRole(RoleType.ADMIN);
@@ -157,7 +180,20 @@ public class Main{
 
         //---------MAKING category table--------------//
         //addCategory("Clothing");
-        addCategory("Medicine");
+        //addCategory("Medicine");
+        //addCategory("Fruits");
+        //addCategory("Vegetable");
+        //addCategory("Food");
+
+        //--------MAKING shop table---------------//
+        //long[] categories_array = {1, 2, 3};
+        //addShop("Panjab Handloom",categories_array,2);
+        //long[] categories_array2={1};
+        //addShop("Jhabra paradise",categories_array2,1);
+
+        long[] categories_array = {4,5};
+        //addShop("Jaykedaar",categories_array,3);
+        addShop("Jaykedaar",categories_array,2);
         System.out.println("Bye Bye !!");
 
     }
