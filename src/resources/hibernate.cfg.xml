@@ -16,7 +16,7 @@
 
       <mapping class="com.bachat.central.dao.Address"/>
 
-      <!--mapping class="com.bachat.central.dao.Category"/-->
+      <mapping class="com.bachat.central.dao.Category"/>
 
       <mapping class="com.bachat.central.dao.City"/>
 

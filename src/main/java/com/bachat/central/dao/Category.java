@@ -15,7 +15,7 @@ public class Category implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "category_id", nullable = false, unique = true)
+    @Column(name = "category_id")
     private long category_id = 0;
 
     @Basic
@@ -30,4 +30,20 @@ public class Category implements Serializable{
     //one-to-many relationship with offer
     //Bidirectional
     //private Set<Offer>offers = new HashSet<Offer>(0);
+
+    public long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(long category_id) {
+        this.category_id = category_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

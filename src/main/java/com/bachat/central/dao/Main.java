@@ -116,6 +116,15 @@ public class Main{
         session.save(userRole);
         session.getTransaction().commit();
     }
+
+    public static void addCategory(String category_name){
+        Session session = getSession();
+        session.beginTransaction();
+        Category category = new Category();
+        category.setName(category_name);
+        session.save(category);
+        session.getTransaction().commit();
+    }
     ///////////////////////////////////////////////////////
 
     public static void main(final String[] args) throws Exception {
@@ -144,7 +153,11 @@ public class Main{
 
 
         //---------MAKING user_role table-----------//
-        addUserRole(3L,2L);
+        //addUserRole(3L,2L);
+
+        //---------MAKING category table--------------//
+        //addCategory("Clothing");
+        addCategory("Medicine");
         System.out.println("Bye Bye !!");
 
     }
