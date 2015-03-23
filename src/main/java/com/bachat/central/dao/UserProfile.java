@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "user_profile")
 public class UserProfile implements Serializable{
     @GenericGenerator(name = "generator", strategy = "foreign",
-    parameters = @org.hibernate.annotations.Parameter(name ="property",value = "user"))
+    parameters = @org.hibernate.annotations.Parameter(name ="property", value = "user"))
     @Id
     @Column(name ="user_id")
     @GeneratedValue(generator = "generator")

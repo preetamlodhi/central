@@ -191,9 +191,9 @@ public class Main{
         //long[] categories_array2={1};
         //addShop("Jhabra paradise",categories_array2,1);
 
-        long[] categories_array = {4,5};
+        //long[] categories_array = {4,5};
         //addShop("Jaykedaar",categories_array,3);
-        addShop("Jaykedaar",categories_array,2);
+        //addShop("Jaykedaar",categories_array,2);
         System.out.println("Bye Bye !!");
 
     }

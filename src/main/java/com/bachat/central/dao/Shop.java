@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -30,6 +31,20 @@ public class Shop implements Serializable{
     @Basic
     @Column(name = "name", nullable = false,length = 50)
     private String name=null;
+
+    @Basic
+    @Temporal(TemporalType.TIME)
+    @Column(name = "opening_time", nullable = false)
+    private Date opening_time = null;
+
+    @Basic
+    @Temporal(TemporalType.TIME)
+    @Column(name = "closing_time", nullable = false)
+    private Date closing_time = null;
+
+    @Basic
+    @Column(name = "off_day")
+    private String off_day=null;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
