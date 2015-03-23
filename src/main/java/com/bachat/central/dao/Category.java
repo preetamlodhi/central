@@ -26,13 +26,13 @@ public class Category implements Serializable{
 
     //MANY-TO-MANY relationship with shop
     //Bidirectional
-
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     private Set<Shop>shops = new HashSet<Shop>(0);
 
     //one-to-many relationship with offer
-    //Bidirectional
-    //private Set<Offer>offers = new HashSet<Offer>(0);
+    //bidirectional
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "category")
+    private Set<Offer>offers = new HashSet<Offer>(0);
 
     public Category(){}
 

@@ -9,6 +9,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -130,6 +131,8 @@ public class Main{
     //Adding a shop
     //Accepts shop name, categories present in category table, seller_id present
     //in seller table.
+    //currently opening_time , closing_time and offday is set to default
+    //later it will be changed.
     public static void addShop(String shop_name, long[]categories_array,long seller_id){
         Session session = getSession();
         session.beginTransaction();
@@ -137,14 +140,23 @@ public class Main{
         shop.setName(shop_name);
         shop.setSeller((Seller)session.get(Seller.class,seller_id));
         shop.setExternal_shop_id(seller_id*100);                      //////Here proper method has to be set.
-
-
         //adding all categoris
         for(long category_id:categories_array){
             shop.getCategories().add((Category)session.load(Category.class,category_id));
         }
-
         session.save(shop);
+        session.getTransaction().commit();
+    }
+    //Adding a offer
+    //
+    public static void addOffer(long shop_id, long category_id, String description){
+        Session session = getSession();
+        session.beginTransaction();
+        Offer offer = new Offer();
+        offer.setShop((Shop)session.get(Shop.class,shop_id));
+        offer.setCategory((Category) session.get(Category.class, category_id));
+        offer.setDescription(description);
+        session.save(offer);
         session.getTransaction().commit();
     }
     ///////////////////////////////////////////////////////
@@ -194,6 +206,12 @@ public class Main{
         //long[] categories_array = {4,5};
         //addShop("Jaykedaar",categories_array,3);
         //addShop("Jaykedaar",categories_array,2);
+
+        //------MAKING offer table--------------//
+        //addOffer(1L,4L,"Buy one get one free");
+        //addOffer(4L,2L,"50% off on Tea");
+        //addOffer(2L,1L,"40% off on Samosa");
+        //addOffer(2L,5L,"Buy 3 get 1 FREE");
         System.out.println("Bye Bye !!");
 
     }
