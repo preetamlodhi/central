@@ -70,8 +70,11 @@ public class Offer implements Serializable{
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
 
-    //one-to-many relationship with offer_history
-    //private Set<OfferHistory>offerHistories = new HashSet<OfferHistory>(0);
+    //Relationship one-to-many with offer_history table
+    //Bidirectional
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "offer")
+    private Set<OfferHistory>offerHistories = new HashSet<OfferHistory>(0);
+
     public Offer(){}
 
     public long getOffer_id() {

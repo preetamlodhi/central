@@ -34,13 +34,13 @@ public class Shop implements Serializable{
 
     @Basic
     @Temporal(TemporalType.TIME)
-    @Column(name = "opening_time", nullable = false)
-    private Date opening_time = null;
+    @Column(name = "opening_time")
+    private Date opening_time ;
 
     @Basic
     @Temporal(TemporalType.TIME)
-    @Column(name = "closing_time", nullable = false)
-    private Date closing_time = null;
+    @Column(name = "closing_time")
+    private Date closing_time;
 
     @Basic
     @Column(name = "off_day")
@@ -58,19 +58,20 @@ public class Shop implements Serializable{
             inverseJoinColumns = {@JoinColumn(name = "category_id",nullable = false,updatable = false)})
     private Set<Category> categories = new HashSet<Category>(0);
 
-    //one-to-one relationship with address table
-    //Bidirectional
-    //@OneToOne(mappedBy = "address")
-    //private Address address = null;
+    //Relationship
+    //One-to-one and bidirectional with address table
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "shop", cascade = CascadeType.ALL)
+    private Address address;
 
-    //one-to-one relationship with location table
-    //Bidirectional
-   // @OneToOne(mappedBy = "location")
-   // private Location location = null;
+    //Relationship
+    //One-to-one and bidirectional with location table
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "shop", cascade = CascadeType.ALL)
+    private Location location;
 
     //one-to-many relationship with offer table
     //bidirectional
-    //private Set<Offer>offers = new HashSet<Offer>(0);
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "shop")
+    private Set<Offer>offers = new HashSet<Offer>(0);
 
     public Shop(){}
 
@@ -112,5 +113,53 @@ public class Shop implements Serializable{
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public Date getOpening_time() {
+        return opening_time;
+    }
+
+    public void setOpening_time(Date opening_time) {
+        this.opening_time = opening_time;
+    }
+
+    public Date getClosing_time() {
+        return closing_time;
+    }
+
+    public void setClosing_time(Date closing_time) {
+        this.closing_time = closing_time;
+    }
+
+    public String getOff_day() {
+        return off_day;
+    }
+
+    public void setOff_day(String off_day) {
+        this.off_day = off_day;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Set<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
     }
 }

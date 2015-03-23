@@ -41,13 +41,11 @@ public class User implements Serializable{
 
 
     public User(){}
-    //One-to-one and bidirectional with seller
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "seller_id")
-    //private Seller seller=null;
 
-    //One-to-many relationship with OfferHistory
-    //private Set<OfferHistory>offerHistories = new HashSet<OfferHistory>(0);
+    //Relationship one-to-many with offer_history table
+    //Bidirectional
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "user")
+    private Set<OfferHistory>offerHistories = new HashSet<OfferHistory>(0);
 
 
     //Getter and setter methods

@@ -1,5 +1,7 @@
 package com.bachat.central.dao;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,10 +11,12 @@ import java.io.Serializable;
 @Entity
 @Table(name = "address")
 public class Address implements Serializable{
+    @GenericGenerator(name = "generator", strategy = "foreign",
+            parameters = @org.hibernate.annotations.Parameter(name ="property", value = "shop"))
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "address_id")
-    private long address_id = 0;
+    @Column(name ="shop_id")
+    @GeneratedValue(generator = "generator")
+    private long shop_id=0;
 
     @Basic
     @Column(name = "line1", nullable = false, length = 30)
@@ -30,6 +34,12 @@ public class Address implements Serializable{
     @Column(name = "pincode", length = 6)
     private String pincode = null;
 
+    //Relationship
+    //One-to-one and bidirectional with shop table
+    @OneToOne (fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private Shop shop;
+
     //Many to one relationship with City
     //Bidirectional
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,12 +51,12 @@ public class Address implements Serializable{
     @JoinColumn(name = "state_id", nullable = false)
     private State state;
 
-    public long getAddress_id() {
-        return address_id;
+    public long getShop_id() {
+        return shop_id;
     }
 
-    public void setAddress_id(long address_id) {
-        this.address_id = address_id;
+    public void setShop_id(long shop_id) {
+        this.shop_id = shop_id;
     }
 
     public String getLine1() {
@@ -95,5 +105,13 @@ public class Address implements Serializable{
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }

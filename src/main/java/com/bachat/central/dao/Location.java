@@ -1,8 +1,8 @@
 package com.bachat.central.dao;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -11,9 +11,58 @@ import java.io.Serializable;
 @Entity
 @Table(name = "location" )
 public class Location implements Serializable{
-
-    //Composite primary key
-    //Coordinate object consist if latitude and longitude
+    @GenericGenerator(name = "generator", strategy = "foreign",
+            parameters = @org.hibernate.annotations.Parameter(name ="property", value = "shop"))
     @Id
-    private LocationPK locationPK = null;
+    @Column(name ="shop_id")
+    @GeneratedValue(generator = "generator")
+    private long shop_id=0;
+
+    @Basic
+    @Column(name = "latitude", nullable = false)
+    private Double latitude = 0.0;
+
+    @Basic
+    @Column(name = "longitude", nullable = false)
+    private Double longitude = 0.0;
+
+    //Relationship
+    //One-to-one and bidirectional with shop table
+    @OneToOne (fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private Shop shop;
+
+    public Location(){}
+
+    public long getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(long shop_id) {
+        this.shop_id = shop_id;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
 }
