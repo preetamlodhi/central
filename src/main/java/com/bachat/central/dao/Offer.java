@@ -43,6 +43,10 @@ public class Offer implements Serializable{
     private Date end_time=null;
 
     @Basic
+    @Column(name = "title", nullable = false, length = 30)
+    private String title = null;
+
+    @Basic
     @Column(name = "description", nullable = false, length = 100)     //maximum 50 characters for description
     private String description =null;
 
